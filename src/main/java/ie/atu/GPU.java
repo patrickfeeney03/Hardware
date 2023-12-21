@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class GPU {
     private String name;
     private float price;
+    private String brand;
     private int vram;
-    private String eBayLink;
+    private String ebaylink;
 }
