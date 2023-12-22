@@ -1,6 +1,5 @@
-package ie.atu;
+package ie.atu.GPU;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,15 +12,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class CPU {
+public class GPU {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Unique Key
+    private Long id;
 
     private String name;
     private float price;
-    private String socket;
-    private String frequency;
     private String brand;
+    private float vram;
     private String ebaylink;
 }
