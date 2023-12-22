@@ -45,8 +45,8 @@ public class HardwareController {
     }
 
     @PutMapping("cpus/{id}")
-    public ResponseEntity<?> updateCPU(@PathVariable("id") Long id, @RequestBody CPU updatedCpu) {
-        CPU updatedCPU = hardwareService.updateCPU(id, updatedCpu);
+    public ResponseEntity<?> updateCPU(@PathVariable("id") Long id, @RequestBody CPU modifiedCPU) {
+        CPU updatedCPU = hardwareService.updateCPU(id, modifiedCPU);
         return ResponseEntity.ok(updatedCPU);
     }
 
@@ -78,8 +78,8 @@ public class HardwareController {
     }
 
     @PutMapping("gpus/{id}")
-    public ResponseEntity<?> updateGPU(@PathVariable("id") Long id, @RequestBody GPU updatedGpu) {
-        GPU updatedGPU = hardwareService.updateGPU(id, updatedGpu);
+    public ResponseEntity<?> updateGPU(@PathVariable("id") Long id, @RequestBody GPU modifiedGPU) {
+        GPU updatedGPU = hardwareService.updateGPU(id, modifiedGPU);
         return ResponseEntity.ok(updatedGPU);
     }
 

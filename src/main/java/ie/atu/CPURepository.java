@@ -11,5 +11,5 @@ public interface CPURepository extends JpaRepository<CPU, Long> {
 
     List<CPU> findByName(String name);
 
-    List<CPU> findByPrice(float price);
+    List<CPU> findByPrice(Float price);
 }
