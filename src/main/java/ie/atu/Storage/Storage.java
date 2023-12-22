@@ -1,4 +1,4 @@
-package ie.atu;
+package ie.atu.Storage;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,5 +20,6 @@ public class Storage {
     private String name;
     private float price;
     private int capacity;
-    private String eBayLink;
+    private String brand;
+    private String ebaylink;
 }

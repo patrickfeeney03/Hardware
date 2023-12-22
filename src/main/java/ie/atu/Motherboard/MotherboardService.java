@@ -1,4 +1,4 @@
-package ie.atu;
+package ie.atu.Motherboard;
 
 import jakarta.persistence.criteria.Predicate;
 import org.hibernate.ResourceClosedException;
@@ -16,16 +16,22 @@ public class MotherboardService {
         this.motherboardRepository = motherboardRepository;
     }
 
-    public List<Motherboard> getMotherboardByBrand(String brand) {
-        return motherboardRepository.findByBrand(brand);
-    }
+    public List<Motherboard> getMotherboard(String brand, String name, Float price) {
+        return motherboardRepository.findAll((Specification<Motherboard>) (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
 
-    public List<Motherboard> getMotherboardByName(String name) {
-        return motherboardRepository.findByName(name);
-    }
+            if (brand != null && !brand.isEmpty()) {
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("brand")), "%" + brand.toLowerCase() + "%"));
+            }
+            if (name != null && !name.isEmpty()) {
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
+            }
+            if (price != null) {
+                predicates.add(criteriaBuilder.equal(root.get("price"), price));
+            }
 
-    public List<Motherboard> findAll() {
-        return motherboardRepository.findAll();
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        });
     }
 
     public Motherboard saveMotherboard(Motherboard motherboard) {
@@ -46,25 +52,5 @@ public class MotherboardService {
         temporaryMotherboard.setEbaylink(updatedMotherboard.getEbaylink());
 
         return motherboardRepository.save(temporaryMotherboard);
-    }
-
-    // Spring Data JPA Specification
-    public List<Motherboard> findMotherboards(String brand, String name, Float price) {
-        return motherboardRepository.findAll((Specification<Motherboard>) (root, query, criteriaBuilder) -> {
-           List<Predicate> predicates = new ArrayList<>();
-
-           if (brand != null && !brand.isEmpty()) {
-               predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("brand")), "%" + brand.toLowerCase() + "%"));
-           }
-           if (name != null && !name.isEmpty()) {
-               predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
-           }
-           if (price != null) {
-               predicates.add(criteriaBuilder.equal(root.get("price"), price));
-           }
-
-           return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-        });
-
     }
 }

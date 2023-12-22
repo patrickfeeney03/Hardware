@@ -1,4 +1,4 @@
-package ie.atu;
+package ie.atu.Motherboard;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class MotherboardController {
     public ResponseEntity<?> getMotherboards(@RequestParam(name = "brand", required = false) String brand,
                                              @RequestParam(name = "name", required = false) String name,
                                              @RequestParam(name = "price", required = false) Float price) {
-        List<Motherboard> motherboards = motherboardService.findMotherboards(brand, name, price);
+        List<Motherboard> motherboards = motherboardService.getMotherboard(brand, name, price);
         return ResponseEntity.ok(motherboards);
     }
 

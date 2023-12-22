@@ -1,4 +1,4 @@
-package ie.atu;
+package ie.atu.GPU;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

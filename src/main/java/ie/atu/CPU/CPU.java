@@ -1,4 +1,4 @@
-package ie.atu;
+package ie.atu.CPU;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,13 +12,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class RAM {
+public class CPU {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // Unique Key
 
     private String name;
     private float price;
-    private int capacity;
-    private String eBayLink;
+    private String socket;
+    private String frequency;
+    private String brand;
+    private String ebaylink;
 }
