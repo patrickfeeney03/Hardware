@@ -15,7 +15,7 @@ public class RAMController {
         this.ramService = ramService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> getRAMs(@RequestParam(name = "brand", required = false) String brand,
                                      @RequestParam(name = "name", required = false) String name,
                                      @RequestParam(name = "price", required = false) Float price) {
@@ -23,7 +23,7 @@ public class RAMController {
         return ResponseEntity.ok(rams);
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<?> createRAM(@RequestBody RAM ram) {
         ramService.saveRAM(ram);
         return ResponseEntity.ok("RAM created successfully");

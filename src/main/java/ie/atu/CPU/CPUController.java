@@ -14,7 +14,7 @@ public class CPUController {
         this.cpuService = cpuService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> getCPUs(@RequestParam(name = "brand", required = false) String brand,
                                      @RequestParam(name = "name", required = false) String name,
                                      @RequestParam(name = "price", required = false) Float price) {
@@ -22,7 +22,7 @@ public class CPUController {
         return ResponseEntity.ok(cpus);
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<?> createCPU(@RequestBody CPU cpu) {
         cpuService.saveCPU(cpu);
         return ResponseEntity.ok("CPU created successfully");

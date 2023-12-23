@@ -14,7 +14,7 @@ public class StorageController {
         this.storageService = storageService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> getStorages(@RequestParam(name = "brand", required = false) String brand,
                                          @RequestParam(name = "name", required = false) String name,
                                          @RequestParam(name = "price", required = false) Float price) {
@@ -22,7 +22,7 @@ public class StorageController {
         return ResponseEntity.ok(storages);
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<?> createStorage(@RequestBody Storage storage) {
         storageService.saveStorage(storage);
         return ResponseEntity.ok("Storage created successfully");

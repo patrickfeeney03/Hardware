@@ -14,7 +14,7 @@ public class GPUController {
         this.gpuService = gpuService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> getGPU(@RequestParam(name = "brand", required = false) String brand,
                                     @RequestParam(name = "name", required = false) String name,
                                     @RequestParam(name = "price", required = false) Float price) {
@@ -22,7 +22,7 @@ public class GPUController {
         return ResponseEntity.ok(gpus);
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<?> createGPU(@RequestBody GPU gpu) {
         gpuService.saveGPU(gpu);
         return ResponseEntity.ok("GPU created successfully");

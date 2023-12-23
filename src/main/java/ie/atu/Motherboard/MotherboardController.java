@@ -14,7 +14,7 @@ public class MotherboardController {
         this.motherboardService = motherboardService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> getMotherboards(@RequestParam(name = "brand", required = false) String brand,
                                              @RequestParam(name = "name", required = false) String name,
                                              @RequestParam(name = "price", required = false) Float price) {
@@ -22,7 +22,7 @@ public class MotherboardController {
         return ResponseEntity.ok(motherboards);
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<?> createMotherboard(@RequestBody Motherboard motherboard) {
         motherboardService.saveMotherboard(motherboard);
         return ResponseEntity.ok("Motherboard created successfully");
