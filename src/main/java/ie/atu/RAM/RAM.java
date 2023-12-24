@@ -20,5 +20,6 @@ public class RAM {
     private String name;
     private float price;
     private int capacity;
+    private String ramtype;
     private String ebaylink;
 }
