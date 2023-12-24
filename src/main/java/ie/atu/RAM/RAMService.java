@@ -1,5 +1,6 @@
 package ie.atu.RAM;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Predicate;
 import org.hibernate.ResourceClosedException;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,7 +17,7 @@ public class RAMService {
         this.ramRepository = ramRepository;
     }
 
-    public List<RAM> getRAM(String brand, String name, Float price) {
+    public List<RAM> getRAM(String brand, String name, Float price, List<String> cpuRamTypes, List<String> motherboardRamTypes) {
         return ramRepository.findAll((Specification<RAM>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -25,6 +26,17 @@ public class RAMService {
             }
             if (name != null && !name.isEmpty()) {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
+            }
+            if (cpuRamTypes != null && !cpuRamTypes.isEmpty()) {
+                System.out.println("CPU RAM TYPE IS: " + cpuRamTypes);
+                CriteriaBuilder.In<String> inCpuRamTypes = criteriaBuilder.in(root.get("ramtype"));
+                cpuRamTypes.forEach(inCpuRamTypes::value);
+                predicates.add(inCpuRamTypes);
+            }
+            if (motherboardRamTypes != null && !motherboardRamTypes.isEmpty()) {
+                CriteriaBuilder.In<String> inMotherboardRamTypes = criteriaBuilder.in(root.get("ramtype"));
+                motherboardRamTypes.forEach(inMotherboardRamTypes::value);
+                predicates.add(inMotherboardRamTypes);
             }
             if (price != null) {
                 predicates.add(criteriaBuilder.equal(root.get("price"), price));
