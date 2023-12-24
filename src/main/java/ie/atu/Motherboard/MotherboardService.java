@@ -1,5 +1,7 @@
 package ie.atu.Motherboard;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import org.hibernate.ResourceClosedException;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,7 +18,7 @@ public class MotherboardService {
         this.motherboardRepository = motherboardRepository;
     }
 
-    public List<Motherboard> getMotherboard(String brand, String name, Float price) {
+    public List<Motherboard> getMotherboard(String brand, String name, Float price, String socket, List<String> compatibleRAMTypes) {
         return motherboardRepository.findAll((Specification<Motherboard>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -25,6 +27,15 @@ public class MotherboardService {
             }
             if (name != null && !name.isEmpty()) {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
+            }
+            if (socket != null && !socket.isEmpty()) {
+                predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get("socket")), socket.toLowerCase()));
+            }
+            if (compatibleRAMTypes != null && !compatibleRAMTypes.isEmpty()) {
+                Join<Motherboard, String> ramTypeJoin = root.join("compatibleRAMTypes"); // Joins both tables to have original object
+                CriteriaBuilder.In<String> inClause = criteriaBuilder.in(ramTypeJoin); // Filter
+                compatibleRAMTypes.forEach(inClause::value);
+                predicates.add(inClause);
             }
             if (price != null) {
                 predicates.add(criteriaBuilder.equal(root.get("price"), price));

@@ -17,8 +17,11 @@ public class MotherboardController {
     @GetMapping
     public ResponseEntity<?> getMotherboards(@RequestParam(name = "brand", required = false) String brand,
                                              @RequestParam(name = "name", required = false) String name,
-                                             @RequestParam(name = "price", required = false) Float price) {
-        List<Motherboard> motherboards = motherboardService.getMotherboard(brand, name, price);
+                                             @RequestParam(name = "price", required = false) Float price,
+                                             @RequestParam(name = "socket", required = false) String socket,
+                                             @RequestParam(name = "compatibleRAMTypes", required = false) List<String> compatibleRAMTypes) {
+        //List<Motherboard> motherboards = motherboardService.getMotherboard(brand, name, price);
+        List<Motherboard> motherboards = motherboardService.getMotherboard(brand, name, price, socket, compatibleRAMTypes);
         return ResponseEntity.ok(motherboards);
     }
 
