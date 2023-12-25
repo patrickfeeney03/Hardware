@@ -1,5 +1,7 @@
 package ie.atu.Storage;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import org.hibernate.ResourceClosedException;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,7 +18,7 @@ public class StorageService {
         this.storageRepository = storageRepository;
     }
 
-    public List<Storage> getStorage(String brand, String name, Float price) {
+    public List<Storage> getStorage(String brand, String name, Float price, List<String> storageTypes) {
         return storageRepository.findAll((Specification<Storage>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -25,6 +27,9 @@ public class StorageService {
             }
             if (name != null && !name.isEmpty()) {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
+            }
+            if (storageTypes != null && !storageTypes.isEmpty()) { // For the mobo
+
             }
             if (price != null) {
                 predicates.add(criteriaBuilder.equal(root.get("price"), price));

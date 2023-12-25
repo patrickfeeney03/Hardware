@@ -21,5 +21,6 @@ public class Storage {
     private float price;
     private int capacity;
     private String brand;
+    private String storageType;
     private String ebaylink;
 }

@@ -23,5 +23,7 @@ public class Motherboard {
     private String chipset;
     @ElementCollection
     private List<String> compatibleRAMTypes;
+    @ElementCollection
+    private List<String> compatibleStorageTypes;
     private String ebaylink;
 }
