@@ -53,4 +53,8 @@ public class CPUService {
 
         return cpuRepository.save(temporaryCPU);
     }
+
+    public CPU getCPUById(Long id) {
+        return cpuRepository.getById(id);
+    }
 }

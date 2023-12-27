@@ -3,6 +3,7 @@ package ie.atu.CPU;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/cpus")
@@ -20,6 +21,24 @@ public class CPUController {
                                      @RequestParam(name = "price", required = false) Float price) {
         List<CPU> cpus = cpuService.getCPU(brand, name, price);
         return ResponseEntity.ok(cpus);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> getCPUById(@PathVariable("id") Long id) {
+        CPU cpu = cpuService.getCPUById(id);
+        // If I dont 'copy' the cpu to another cpu it just doesnt work because of some funky hibernate shit
+        CPUDto cpuDto = new CPUDto(
+                cpu.getId(),
+                cpu.getName(),
+                cpu.getPrice(),
+                cpu.getSocket(),
+                cpu.getFrequency(),
+                cpu.getBrand(),
+                cpu.getCompatibleRAMTypes(),
+                cpu.getEbaylink()
+        );
+        System.out.println(cpuDto);
+        return ResponseEntity.ok(cpuDto);
     }
 
     @PostMapping
