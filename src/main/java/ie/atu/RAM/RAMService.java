@@ -17,7 +17,7 @@ public class RAMService {
         this.ramRepository = ramRepository;
     }
 
-    public List<RAM> getRAM(String brand, String name, Float price, List<String> cpuRamTypes, List<String> motherboardRamTypes) {
+    public List<RAM> getRAM(String brand, String name, Float price, List<String> cpuRamTypes, List<String> motherboardRamTypes, Integer capacity, String ramtype, Long id) {
         return ramRepository.findAll((Specification<RAM>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -40,6 +40,15 @@ public class RAMService {
             }
             if (price != null) {
                 predicates.add(criteriaBuilder.equal(root.get("price"), price));
+            }
+            if (capacity != null) {
+                predicates.add(criteriaBuilder.equal(root.get("capacity"), capacity));
+            }
+            if (ramtype != null && !ramtype.isEmpty()) {
+                predicates.add(criteriaBuilder.equal(root.get("ramtype"), ramtype));
+            }
+            if (id != null) {
+                predicates.add(criteriaBuilder.equal(root.get("id"), id));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

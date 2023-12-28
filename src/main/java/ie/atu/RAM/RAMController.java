@@ -20,8 +20,11 @@ public class RAMController {
                                      @RequestParam(name = "name", required = false) String name,
                                      @RequestParam(name = "price", required = false) Float price,
                                      @RequestParam(name = "cpuRamTypes", required = false) List<String> cpuRamTypes,
-                                     @RequestParam(name = "motherboardRamTypes", required = false) List<String> motherboardRamTypes) {
-        List<RAM> rams = ramService.getRAM(brand, name, price, cpuRamTypes, motherboardRamTypes);
+                                     @RequestParam(name = "motherboardRamTypes", required = false) List<String> motherboardRamTypes,
+                                     @RequestParam(name = "capacity", required = false) Integer capacity,
+                                     @RequestParam(name = "ramtype", required = false) String ramtype,
+                                     @RequestParam(name = "id", required = false) Long id) {
+        List<RAM> rams = ramService.getRAM(brand, name, price, cpuRamTypes, motherboardRamTypes, capacity, ramtype, id);
         return ResponseEntity.ok(rams);
     }
 

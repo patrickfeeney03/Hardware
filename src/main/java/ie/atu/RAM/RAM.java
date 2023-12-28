@@ -18,8 +18,8 @@ public class RAM {
     private Long id;
 
     private String name;
-    private float price;
-    private int capacity;
+    private Float price;
+    private Integer capacity;
     private String ramtype;
     private String ebaylink;
 }
