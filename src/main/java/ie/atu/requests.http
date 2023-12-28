@@ -1,0 +1,19 @@
+// Motherboards
+###
+POST http://localhost:8080/motherboards
+Content-Type: application/json
+
+{
+  "name": "Asrock Intel H310CM-DVS LGA 1151 Socket H4 Micro ATX DDR4-SDRAM Motherboard",
+  "price": 57.79,
+  "brand": "Asrock",
+  "socket": "LGA 1151",
+  "chipset": "H310",
+  "compatibleRAMTypes": [
+    "DDR4"
+  ],
+  "compatibleStorageTypes": [
+    "SATA"
+  ],
+  "ebaylink": "https://www.ebay.ie/itm/185319342441?hash=item2b25e4c169%3Ag%3AoYIAAOSwilxiHTiQ&amdata=enc%3AAQAIAAAAwCZaNSdvaf7n5fUJcDmmO4u9sqjYuw3xLp1b%2Fh4M%2BGFKuGFU2x%2F6TO1tMfR2%2BisXtPf2vmOh8fS%2B4Q3G5mD8BF5sww%2FqXtPB2njgEfiJQCv%2BOuGER5QhOGt8YPtahT5578nEfWsJdon5hqDl9lvM8lqPfw9t%2FpD0K953jPVjnx2FgknnqnbmKuNUL1KFJEKssIpg%2BQM%2BHtOvCDuo2QGkJj1QWiqL%2FjSe4GGny6%2FhyQjwsz7vQrBiY6YScv4kc9%2BT%2BA%3D%3D%7Ctkp%3ABk9SR-zes6aWYw&LH_ItemCondition=1000"
+}

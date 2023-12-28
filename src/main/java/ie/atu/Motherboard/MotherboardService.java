@@ -18,7 +18,7 @@ public class MotherboardService {
         this.motherboardRepository = motherboardRepository;
     }
 
-    public List<Motherboard> getMotherboard(String brand, String name, Float price, String socket, List<String> compatibleRAMTypes) {
+    public List<Motherboard> getMotherboard(String brand, String name, Float price, String socket, List<String> compatibleRAMTypes, String chipset, List<String> compatibleStorageTypes, String ebaylink, Long id) {
         return motherboardRepository.findAll((Specification<Motherboard>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -39,6 +39,21 @@ public class MotherboardService {
             }
             if (price != null) {
                 predicates.add(criteriaBuilder.equal(root.get("price"), price));
+            }
+            if (chipset != null && !chipset.isEmpty()) {
+                predicates.add(criteriaBuilder.equal(root.get("chipset"), chipset));
+            }
+            if (compatibleStorageTypes != null && !compatibleStorageTypes.isEmpty()) {
+                Join<Motherboard, String> storageTypeJoin = root.join("compatibleStorageTypes");
+                CriteriaBuilder.In<String> inClause = criteriaBuilder.in(storageTypeJoin);
+                compatibleStorageTypes.forEach(inClause::value);
+                predicates.add(inClause);
+            }
+            if (ebaylink != null && !ebaylink.isEmpty()) {
+                predicates.add(criteriaBuilder.equal(root.get("ebaylink"), ebaylink));
+            }
+            if (id != null) {
+                predicates.add(criteriaBuilder.equal(root.get("id"), id));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

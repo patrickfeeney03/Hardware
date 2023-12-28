@@ -21,29 +21,14 @@ public class MotherboardController {
                                              @RequestParam(name = "name", required = false) String name,
                                              @RequestParam(name = "price", required = false) Float price,
                                              @RequestParam(name = "socket", required = false) String socket,
-                                             @RequestParam(name = "compatibleRAMTypes", required = false) List<String> compatibleRAMTypes) {
+                                             @RequestParam(name = "chipset", required = false) String chipset,
+                                             @RequestParam(name = "compatibleRAMTypes", required = false) List<String> compatibleRAMTypes,
+                                             @RequestParam(name = "compatibleStorageTypes", required = false) List<String> compatibleStorageTypes,
+                                             @RequestParam(name = "ebaylink", required = false) String ebaylink,
+                                             @RequestParam(name = "id", required = false) Long id) {
         //List<Motherboard> motherboards = motherboardService.getMotherboard(brand, name, price);
-        List<Motherboard> motherboards = motherboardService.getMotherboard(brand, name, price, socket, compatibleRAMTypes);
+        List<Motherboard> motherboards = motherboardService.getMotherboard(brand, name, price, socket, compatibleRAMTypes, chipset, compatibleStorageTypes, ebaylink, id);
         return ResponseEntity.ok(motherboards);
-    }
-
-    @GetMapping("{id}")
-    public ResponseEntity<?> getMotherboardById(@PathVariable("id") Long id) {
-        Motherboard motherboard = motherboardService.getMotherboardById(id);
-        // If I dont 'copy' the cpu to another cpu it just doesnt work because of some funky hibernate shit
-        MotherboardDto motherboardDto = new MotherboardDto(
-                motherboard.getId(),
-                motherboard.getName(),
-                motherboard.getPrice(),
-                motherboard.getBrand(),
-                motherboard.getSocket(),
-                motherboard.getChipset(),
-                motherboard.getCompatibleRAMTypes(),
-                motherboard.getCompatibleStorageTypes(),
-                motherboard.getEbaylink()
-        );
-        System.out.println(motherboardDto);
-        return ResponseEntity.ok(motherboardDto);
     }
 
     @PostMapping
