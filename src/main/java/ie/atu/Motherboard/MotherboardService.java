@@ -64,4 +64,8 @@ public class MotherboardService {
 
         return motherboardRepository.save(temporaryMotherboard);
     }
+
+    public Motherboard getMotherboardById(Long id) {
+        return motherboardRepository.getById(id);
+    }
 }

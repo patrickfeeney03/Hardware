@@ -1,5 +1,7 @@
 package ie.atu.Motherboard;
 
+import ie.atu.CPU.CPU;
+import ie.atu.CPU.CPUDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,25 @@ public class MotherboardController {
         //List<Motherboard> motherboards = motherboardService.getMotherboard(brand, name, price);
         List<Motherboard> motherboards = motherboardService.getMotherboard(brand, name, price, socket, compatibleRAMTypes);
         return ResponseEntity.ok(motherboards);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> getMotherboardById(@PathVariable("id") Long id) {
+        Motherboard motherboard = motherboardService.getMotherboardById(id);
+        // If I dont 'copy' the cpu to another cpu it just doesnt work because of some funky hibernate shit
+        MotherboardDto motherboardDto = new MotherboardDto(
+                motherboard.getId(),
+                motherboard.getName(),
+                motherboard.getPrice(),
+                motherboard.getBrand(),
+                motherboard.getSocket(),
+                motherboard.getChipset(),
+                motherboard.getCompatibleRAMTypes(),
+                motherboard.getCompatibleStorageTypes(),
+                motherboard.getEbaylink()
+        );
+        System.out.println(motherboardDto);
+        return ResponseEntity.ok(motherboardDto);
     }
 
     @PostMapping
