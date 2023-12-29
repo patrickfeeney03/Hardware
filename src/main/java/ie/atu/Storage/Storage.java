@@ -17,10 +17,10 @@ public class Storage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private float price;
-    private int capacity;
-    private String brand;
+    private String name;//
+    private Float price;//
+    private Integer capacity;
+    private String brand; //
     private String storageType;
     private String ebaylink;
 }

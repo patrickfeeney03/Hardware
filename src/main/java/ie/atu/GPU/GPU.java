@@ -18,8 +18,8 @@ public class GPU {
     private Long id;
 
     private String name;
-    private float price;
+    private Float price;
     private String brand;
-    private float vram;
+    private Float vram;
     private String ebaylink;
 }

@@ -18,8 +18,11 @@ public class StorageController {
     public ResponseEntity<?> getStorages(@RequestParam(name = "brand", required = false) String brand,
                                          @RequestParam(name = "name", required = false) String name,
                                          @RequestParam(name = "price", required = false) Float price,
-                                         @RequestParam(name = "storagetypes", required = false) List<String> storageTypes) {
-        List<Storage> storages = storageService.getStorage(brand, name, price, storageTypes);
+                                         @RequestParam(name = "storagetypes", required = false) List<String> storageTypes,
+                                         @RequestParam(name = "capacity", required = false) Integer capacity,
+                                         @RequestParam(name = "storageType", required = false) String storageType,
+                                         @RequestParam(name = "id", required = false) Long id) {
+        List<Storage> storages = storageService.getStorage(brand, name, price, storageTypes, capacity, storageType, id);
         return ResponseEntity.ok(storages);
     }
 

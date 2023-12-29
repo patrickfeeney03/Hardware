@@ -17,8 +17,11 @@ public class GPUController {
     @GetMapping
     public ResponseEntity<?> getGPU(@RequestParam(name = "brand", required = false) String brand,
                                     @RequestParam(name = "name", required = false) String name,
-                                    @RequestParam(name = "price", required = false) Float price) {
-        List<GPU> gpus = gpuService.getGPU(brand, name, price);
+                                    @RequestParam(name = "price", required = false) Float price,
+                                    @RequestParam(name = "vram", required = false) Float vram,
+                                    @RequestParam(name = "ebaylink", required = false) String ebaylink,
+                                    @RequestParam(name = "id", required = false) Long id) {
+        List<GPU> gpus = gpuService.getGPU(brand, name, price, vram, ebaylink, id);
         return ResponseEntity.ok(gpus);
     }
 

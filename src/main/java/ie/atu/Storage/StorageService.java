@@ -18,7 +18,7 @@ public class StorageService {
         this.storageRepository = storageRepository;
     }
 
-    public List<Storage> getStorage(String brand, String name, Float price, List<String> storageTypes) {
+    public List<Storage> getStorage(String brand, String name, Float price, List<String> storageTypes, Integer capacity, String storageType, Long id) {
         return storageRepository.findAll((Specification<Storage>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -33,6 +33,15 @@ public class StorageService {
             }
             if (price != null) {
                 predicates.add(criteriaBuilder.equal(root.get("price"), price));
+            }
+            if (capacity != null) {
+                predicates.add(criteriaBuilder.equal(root.get("capacity"), capacity));
+            }
+            if (storageType != null && !storageType.isEmpty()) {
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("storageType")), storageType.toLowerCase()));
+            }
+            if (id != null) {
+                predicates.add(criteriaBuilder.equal(root.get("id"), id));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

@@ -26,7 +26,6 @@ public class MotherboardController {
                                              @RequestParam(name = "compatibleStorageTypes", required = false) List<String> compatibleStorageTypes,
                                              @RequestParam(name = "ebaylink", required = false) String ebaylink,
                                              @RequestParam(name = "id", required = false) Long id) {
-        //List<Motherboard> motherboards = motherboardService.getMotherboard(brand, name, price);
         List<Motherboard> motherboards = motherboardService.getMotherboard(brand, name, price, socket, compatibleRAMTypes, chipset, compatibleStorageTypes, ebaylink, id);
         return ResponseEntity.ok(motherboards);
     }

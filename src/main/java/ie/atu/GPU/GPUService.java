@@ -16,7 +16,7 @@ public class GPUService {
         this.gpuRepository = gpuRepository;
     }
 
-    public List<GPU> getGPU(String brand, String name, Float price) {
+    public List<GPU> getGPU(String brand, String name, Float price, Float vram, String ebaylink, Long id) {
         return gpuRepository.findAll((Specification<GPU>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -28,6 +28,15 @@ public class GPUService {
             }
             if (price != null) {
                 predicates.add(criteriaBuilder.equal(root.get("price"), price));
+            }
+            if (vram != null) {
+                predicates.add(criteriaBuilder.equal(root.get("vram"), vram));
+            }
+            if (ebaylink != null && !ebaylink.isEmpty()) {
+                predicates.add(criteriaBuilder.equal(root.get("ebaylink"), ebaylink));
+            }
+            if (id != null) {
+                predicates.add(criteriaBuilder.equal(root.get("id"), id));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
