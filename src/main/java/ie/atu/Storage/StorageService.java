@@ -1,5 +1,6 @@
 package ie.atu.Storage;
 
+import ie.atu.Motherboard.Motherboard;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
@@ -29,7 +30,9 @@ public class StorageService {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
             }
             if (storageTypes != null && !storageTypes.isEmpty()) { // For the mobo
-
+                CriteriaBuilder.In<String> inStorageTypes = criteriaBuilder.in(root.get("storageType")); // Adjust "storageType" to the field in Storage entity
+                storageTypes.forEach(inStorageTypes::value);
+                predicates.add(inStorageTypes);
             }
             if (price != null) {
                 predicates.add(criteriaBuilder.equal(root.get("price"), price));
