@@ -52,12 +52,11 @@ public class GPUService {
     }
 
     public GPU updateGPU(Long id, GPU updatedGpu) {
-        GPU temporaryGPU = gpuRepository
-                .findById(id)
-                .orElseThrow(() -> new ResourceClosedException("GPU not  found for this id: " + id));
+        GPU temporaryGPU = gpuRepository.findById(id).orElseThrow(() -> new ResourceClosedException("GPU not  found for this id: " + id));
         temporaryGPU.setName(updatedGpu.getName());
         temporaryGPU.setPrice(updatedGpu.getPrice());
         temporaryGPU.setBrand(updatedGpu.getBrand());
+        temporaryGPU.setVram(updatedGpu.getVram());
         temporaryGPU.setEbaylink(updatedGpu.getEbaylink());
 
         return gpuRepository.save(temporaryGPU);
