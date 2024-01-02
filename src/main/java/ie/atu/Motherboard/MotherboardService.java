@@ -75,12 +75,10 @@ public class MotherboardService {
         temporaryMotherboard.setBrand(updatedMotherboard.getBrand());
         temporaryMotherboard.setSocket(updatedMotherboard.getSocket());
         temporaryMotherboard.setChipset(updatedMotherboard.getChipset());
+        temporaryMotherboard.setCompatibleRAMTypes(updatedMotherboard.getCompatibleRAMTypes());
+        temporaryMotherboard.setCompatibleStorageTypes(updatedMotherboard.getCompatibleStorageTypes());
         temporaryMotherboard.setEbaylink(updatedMotherboard.getEbaylink());
 
         return motherboardRepository.save(temporaryMotherboard);
-    }
-
-    public Motherboard getMotherboardById(Long id) {
-        return motherboardRepository.getById(id);
     }
 }
