@@ -1,7 +1,5 @@
 package ie.atu.Motherboard;
 
-import ie.atu.CPU.CPU;
-import ie.atu.CPU.CPUDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

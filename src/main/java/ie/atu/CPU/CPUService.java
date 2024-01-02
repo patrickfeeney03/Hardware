@@ -69,12 +69,9 @@ public class CPUService {
         temporaryCPU.setSocket(updatedCpu.getSocket());
         temporaryCPU.setFrequency(updatedCpu.getFrequency());
         temporaryCPU.setBrand(updatedCpu.getBrand());
+        temporaryCPU.setCompatibleRAMTypes(updatedCpu.getCompatibleRAMTypes());
         temporaryCPU.setEbaylink(updatedCpu.getEbaylink());
 
         return cpuRepository.save(temporaryCPU);
-    }
-
-    public CPU getCPUById(Long id) {
-        return cpuRepository.getById(id);
     }
 }

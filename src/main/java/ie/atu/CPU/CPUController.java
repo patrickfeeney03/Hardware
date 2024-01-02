@@ -29,26 +29,6 @@ public class CPUController {
         return ResponseEntity.ok(cpus);
     }
 
-    // I guess the  code below is useless. Since I can get the ID through the main getCPUs method.
-    // I just had to add it as an optional parameter.
-//    @GetMapping("{id}")
-//    public ResponseEntity<?> getCPUById(@PathVariable("id") Long id) {
-//        CPU cpu = cpuService.getCPUById(id);
-//        // If I dont 'copy' the cpu to another cpu it just doesnt work because of some funky hibernate shit
-//        CPUDto cpuDto = new CPUDto(
-//                cpu.getId(),
-//                cpu.getName(),
-//                cpu.getPrice(),
-//                cpu.getSocket(),
-//                cpu.getFrequency(),
-//                cpu.getBrand(),
-//                cpu.getCompatibleRAMTypes(),
-//                cpu.getEbaylink()
-//        );
-//        System.out.println(cpuDto);
-//        return ResponseEntity.ok(cpuDto);
-//    }
-
     @PostMapping
     public ResponseEntity<?> createCPU(@RequestBody CPU cpu) {
         cpuService.saveCPU(cpu);
