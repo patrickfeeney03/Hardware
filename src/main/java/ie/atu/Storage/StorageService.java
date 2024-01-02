@@ -65,6 +65,7 @@ public class StorageService {
         temporaryStorage.setPrice(updatedStorage.getPrice());
         temporaryStorage.setCapacity(updatedStorage.getCapacity());
         temporaryStorage.setBrand(updatedStorage.getBrand());
+        temporaryStorage.setStorageType(updatedStorage.getStorageType());
         temporaryStorage.setEbaylink(updatedStorage.getEbaylink());
 
         return storageRepository.save(temporaryStorage);
