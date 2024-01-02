@@ -68,6 +68,7 @@ public class RAMService {
         temporaryRAM.setName(updatedRam.getName());
         temporaryRAM.setPrice(updatedRam.getPrice());
         temporaryRAM.setCapacity(updatedRam.getCapacity());
+        temporaryRAM.setRamtype(updatedRam.getRamtype());
         temporaryRAM.setEbaylink(updatedRam.getEbaylink());
 
         return ramRepository.save(temporaryRAM);
