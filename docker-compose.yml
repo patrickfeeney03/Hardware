@@ -22,6 +22,26 @@ services:
     networks:
       - my_network
 
+  userinterface-app:
+    image: userinterface:latest
+    ports:
+      - "8079:8079"
+    networks:
+      - my_network
+
+  login-app:
+    image: login:latest
+    ports:
+      - "8082:8082"
+    depends_on:
+      - db2
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db2:5432/users
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: plennon2017
+    networks:
+      - my_network
+
   db:
     image: postgres:latest
     environment:
@@ -35,9 +55,22 @@ services:
     networks:
       - my_network
 
+  db2:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: users
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: plennon2017
+    ports:
+      - "5433:5432"
+    volumes:
+      - your-dbdata2:/var/lib/postgresql/data
+    networks:
+      - my_network
 
 volumes:
   your-dbdata:
+  your-dbdata2:
 
 networks:
   my_network:
