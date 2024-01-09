@@ -17,7 +17,7 @@ public class Motherboard {
     private Long id;
 
     private String name;
-    private float price;
+    private Float price;
     private String brand;
     private String socket;
     private String chipset;

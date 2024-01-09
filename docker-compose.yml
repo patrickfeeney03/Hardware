@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  hardware-app:
+    build:
+      context: .
+      dockerfile: ./hardware.dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/hardware
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: plennon2017
+    networks:
+      - my_network
+
+  compatibility-app:
+    image: compatibility:latest
+    ports:
+      - "8081:8081"
+    networks:
+      - my_network
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: hardware
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: plennon2017
+    ports:
+      - "5432:5432"
+    volumes:
+      - your-dbdata:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+
+volumes:
+  your-dbdata:
+
+networks:
+  my_network:
+    driver: bridge

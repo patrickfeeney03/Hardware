@@ -1,5 +1,5 @@
 // Motherboards
-###
+### This should add a motherboard and return OK
 POST http://localhost:8080/motherboards
 Content-Type: application/json
 
