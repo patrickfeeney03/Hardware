@@ -1,0 +1,75 @@
+version: '3.8'
+services:
+  hardware-app:
+    image: patrickgmit/part-picker:hardware
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/hardware
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: plennon2017
+    networks:
+      - my_network
+
+  compatibility-app:
+    image: patrickgmit/part-picker:compatibility
+    ports:
+      - "8081:8081"
+    networks:
+      - my_network
+
+  userinterface-app:
+    image: patrickgmit/part-picker:userinterface
+    ports:
+      - "8079:8079"
+    networks:
+      - my_network
+
+  login-app:
+    image: patrickgmit/part-picker:login
+    ports:
+      - "8082:8082"
+    depends_on:
+      - db2
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db2:5432/users
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: plennon2017
+    networks:
+      - my_network
+
+  db:
+    image: patrickgmit/part-picker:postgres
+    environment:
+      POSTGRES_DB: hardware
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: plennon2017
+    ports:
+      - "5432:5432"
+    volumes:
+      - your-dbdata:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+  db2:
+    image: patrickgmit/part-picker:postgres
+    environment:
+      POSTGRES_DB: users
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: plennon2017
+    ports:
+      - "5433:5432"
+    volumes:
+      - your-dbdata2:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+volumes:
+  your-dbdata:
+  your-dbdata2:
+
+networks:
+  my_network:
+    driver: bridge
